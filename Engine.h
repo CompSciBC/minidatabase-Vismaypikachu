@@ -36,7 +36,7 @@ struct Engine {
         if(vec) vec -> push_back(recordId);
         else lastIndex.insert(toLower(recIn.last), vector<int>{recordId});
 
-        // idIndex.insert(recIn.id, recordId); // key, value
+        idIndex.insert(recIn.id, recordId); // key, value
         // lastIndex.insert(recIn.last, recordId);
 
         return recordId;
