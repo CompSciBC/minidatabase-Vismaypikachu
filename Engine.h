@@ -46,7 +46,7 @@ struct Engine {
     // Returns true if deletion succeeded.
     bool deleteById(int id) {
         idIndex.resetMetrics(); // reset counters
-        int* pointer = idIndex.find(toLower(id));
+        int* pointer = idIndex.find(id);
         if(!pointer) return false;
 
         int recordId = *pointer;
