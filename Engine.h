@@ -82,10 +82,10 @@ struct Engine {
 
         if (!pointer) return nullptr;
 
-        int recordId = *pointer;
-        if (heap[recordId].deleted) return nullptr;
+        // int recordId = *pointer;
+        // if (heap[recordId].deleted) return nullptr;
 
-        return &heap[recordId]; 
+        return &heap[*pointer]; 
     }
 
     // Returns all records with ID in the range [lo, hi].
