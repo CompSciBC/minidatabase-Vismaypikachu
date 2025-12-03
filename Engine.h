@@ -57,15 +57,14 @@ struct Engine {
         idIndex.erase(id);
 
         // -----------------------
-        string key = rec.last;
-        vector<int>* vec = lastIndex.find(key);
+        vector<int>* vec = lastIndex.find(rec.last);
         if (vec) {
             vec->erase(
-                remove(vec->begin(), vec->end(), recordId), 
+                std::remove(vec->begin(), vec->end(), recordId), 
                 vec->end()
             );
 
-            if(vec -> empty()) lastIndex.erase(key);
+            if(vec -> empty()) lastIndex.erase(rec.last);
         }
 
         return true;
