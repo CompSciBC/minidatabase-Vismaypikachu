@@ -75,13 +75,35 @@ struct Engine {
     // Returns a pointer to the record, or nullptr if not found.
     // Outputs the number of comparisons made in the search.
     const Record *findById(int id, int &cmpOut) {
-        //TODO    
+        idIndex.resetMetrics();
+
+        int* pointer = idIndex.find(id);
+        cmpOut = idIndex.comparisons;
+
+        if (!pointer) return nullptr;
+
+        int recordId = *pointer;
+        if (heap[recordId].deleted) return nullptr;
+
+        return &heap[recordId]; 
     }
 
     // Returns all records with ID in the range [lo, hi].
     // Also reports the number of key comparisons performed.
     vector<const Record *> rangeById(int lo, int hi, int &cmpOut) {
-        //TODO
+        vector<const Record*> results;
+
+        idIndex.resetMetrics();
+        idIndex.rangeApply(
+            lo, 
+            hi, 
+            [&](const int& key, const int& rid) {
+                if (!heap[rid].deleted) results.push_back(&heap[rid]);
+            }
+        );
+
+        cmpOut = idIndex.comparisons;
+        return results;
     }
 
     // Returns all records whose last name begins with a given prefix.
