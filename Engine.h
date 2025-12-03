@@ -46,7 +46,7 @@ struct Engine {
     // Returns true if deletion succeeded.
     bool deleteById(int id) {
         idIndex.resetMetrics(); // reset counters
-        int* pointer = idIndex.find(id);
+        int* pointer = idIndex.find(toLower(id));
         if(!pointer) return false;
 
         int recordId = *pointer;
@@ -58,7 +58,7 @@ struct Engine {
         idIndex.erase(id);
 
         // -----------------------
-        vector<int>* vec = lastIndex.find(rec.last);
+        vector<int>* vec = lastIndex.find(toLower(rec.last));
         if (vec) {
             vec->erase(
                 std::remove(vec->begin(), vec->end(), recordId), 
@@ -81,9 +81,6 @@ struct Engine {
         cmpOut = idIndex.comparisons;
 
         if (!pointer) return nullptr;
-
-        // int recordId = *pointer;
-        // if (heap[recordId].deleted) return nullptr;
 
         return &heap[*pointer]; 
     }
