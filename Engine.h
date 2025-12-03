@@ -5,6 +5,7 @@
 #include <vector>     
 #include "BST.h"      
 #include "Record.h"
+#include <algorithm>
 //add header files as needed
 
 using namespace std;
